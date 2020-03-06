@@ -1,60 +1,95 @@
-/* 
-  Once you complete a problem, refresh ./classes.html in your browser and check to see if the problem's test(s) are passing.
-  Passed tests will be indicated by a green circle.
-  Failed tests will be indicated by a red X.
+// /* 
+//   Once you complete a problem, refresh ./classes.html in your browser and check to see if the problem's test(s) are passing.
+//   Passed tests will be indicated by a green circle.
+//   Failed tests will be indicated by a red X.
 
-  You can refresh the page at any time to re-run all the tests.
+//   You can refresh the page at any time to re-run all the tests.
 
-  Classes are a tool for building similar objects over and over again.
-  They are a construct that helps your organize your code.
+//   Classes are a tool for building similar objects over and over again.
+//   They are a construct that helps your organize your code.
 
-  Let's work with some employees at a company.
-  You work for Widget Co. They have hundreds of employees.
-*/
+//   Let's work with some employees at a company.
+//   You work for Widget Co. They have hundreds of employees.
+// */
 
-////////// PROBLEM 1 //////////
+// ////////// PROBLEM 1 //////////
 
-/*
-  Make a class to help us build all of the employees.
-  Each employee has the following properties:
-    - first_name
-    - last_name
-    - email
-    - age
-  Each employee has the following methods:
-    - makeWidget
-      - This returns a string equal to the employees first name + last name + the word widget
-      - Example: "Dave Smith Widget"
+// // /*
+//   Make a class to help us build all of the employees.
+//   Each employee has the following properties:
+//     - first_name
+//     - last_name
+//     - email
+//     - age
+//   Each employee has the following methods:
+//     - makeWidget
+//       - This returns a string equal to the employees first name + last name + the word widget
+//       - Example: "Dave Smith Widget"
 
-  Call your class Employee and receive all the data in the constructor in the order listed above.
-*/
+//   Call your class Employee and receive all the data in the constructor in the order listed above.
+
 
 //Code Here
 
+class Employee {
+  constructor(first_name,last_name, email,age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+  
+    } 
 
-////////// PROBLEM 2 //////////
+    makeWidget() {
+      return this.first_name + " " + this.last_name +  ' Widget'
+    }
+  
+   
+}
+ 
+  
 
-/*
-  Next, make a manager for Widget Co. that extends Employee
-  Each manager has all of the same properties as an employee with the following additional properties:
-    - reports (other employees) that defaults to an empty array
-  Each manager has the following additional methods:
-    - hire (employee)
-      - Accepts a new employee as a parameter and pushes it to their list of reports.
-    - fire (index)
-      - Fire removes employees from their list of reports at the given index
+// ////////// PROBLEM 2 //////////
 
-  Call your new class Manager
-*/
+// /*
+//   Next, make a manager for Widget Co. that extends Employee
+//   Each manager has all of the same properties as an employee with the following additional properties:
+//     - reports (other employees) that defaults to an empty array
+//   Each manager has the following additional methods:
+//     - hire (employee)
+//       - Accepts a new employee as a parameter and pushes it to their list of reports.
+//     - fire (index)
+//       - Fire removes employees from their list of reports at the given index
 
-//Code Here
+//   Call your new class Manager
+// */
 
+// //Code Here
+
+
+class Manager extends Employee {
+  constructor(first_name,last_name, email,age) {
+    super(first_name,last_name, email,age);
+    this.reports = [];
+  }
+
+  hire(new_employee){
+    this.reports.push(new_employee)
+  }
+  fire (index){
+    this.reports.splice(index,1)
+  }
+}
+
+// let newManager = new Manager
+  
 
 ////////// PROBLEM 3 //////////
 
 /*
   Managers for Widget Co. get promoted when they get more employees, and get a bonus when they fire employees.
-  create a class ProgressiveManager that extends Manager.  A Progressive Manager has all of the same properties as a manager with the following additional properties:
+  create a class ProgressiveManager that extends Manager.  A Progressive Manager has all of the same properties as a manager
+   with the following additional properties:
     - title - default 'Not a manager'
     - bonus - default 0
 
@@ -73,8 +108,32 @@
 
 //Code Here
 
+class ProgressiveManager extends Manager {
+  constructor (first_name,last_name, email,age, reports) { 
+    super(first_name,last_name, email,age,reports)
+     this.title = "Not a manager";
+     this.bonus = 0;
+    }
+        hire(employee){
+          this.reports.push(employee)
+          if (this.reports.length === 0){
+            this.title= "Not a manager"}
+        else  if( this.reports.length <= 3)
+        { this.title= 'Barely Manager'
+        } else  if( this.reports.length <= 10)
+          {this.title= 'Mostly Manager';
+        }else  if( this.reports.length <= 50)
+          {this.title= 'Manager'
+        }else  if( this.reports.length  <= 100)
+          {this.title= 'Manager Plus';
+        }else  if( this.reports.length >= 101)
+          {this.title= 'Bestest Manager' }
+      }
 
-
+fire(index){
+this.reports.splice(index, 1)
+this.bonus += 100
+}}
 ////////// PROBLEM 4 - Black Diamond //////////
 
 /*
@@ -98,6 +157,4 @@
         - The anonymous function should decrease wear_and_tear_count by 10, and set needs_reboot to false
 */
 
-//Code Here
-
-
+// Code Here 
